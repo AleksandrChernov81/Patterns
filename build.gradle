@@ -1,7 +1,7 @@
 plugins {
     id 'java'
-    id 'io.freefair.lombok' version '8.12.1'
-    id 'io.qameta.allure' version '2.11.2'
+    id 'io.freefair.lombok' version '8.6' // Актуальная версия Lombok plugin
+    id 'io.qameta.allure' version '2.11.2' // Плагин для Allure отчетов
 }
 
 group 'ru.netology'
@@ -16,32 +16,29 @@ repositories {
 }
 
 allure {
-    version = '2.20.1'
+    version = '2.27.0' // Актуальная версия Allure
     useJUnit5 {
-        version = '2.20.1'
+        version = '2.27.0' // Версия Allure для JUnit 5
     }
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    testImplementation 'com.codeborne:selenide:6.19.1'
-    testImplementation 'com.github.javafaker:javafaker:1.0.2'
-    testImplementation 'io.qameta.allure:allure-selenide:2.20.1'
-    compileOnly 'org.projectlombok:lombok:1.18.36'
-    annotationProcessor 'org.projectlombok:lombok:1.18.36'
-
-
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2' // JUnit 5 API
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2' // JUnit 5 Engine
+    testImplementation 'com.codeborne:selenide:7.2.3' // Selenide для автоматизации тестов
+    testImplementation 'com.github.javafaker:javafaker:1.0.2' // JavaFaker для генерации тестовых данных
+    testImplementation 'io.qameta.allure:allure-selenide:2.27.0' // Allure интеграция с Selenide
+    compileOnly 'org.projectlombok:lombok:1.18.32' // Lombok для генерации boilerplate кода
+    annotationProcessor 'org.projectlombok:lombok:1.18.32' // Аннотационный процессор Lombok
 }
 
+test {
+    useJUnitPlatform() // Используем JUnit 5 для запуска тестов
+    systemProperties = System.properties // Передаем системные свойства в тесты
 
+    // Настройка headless-режима для Selenide
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless', 'true')
 
-    test {
-        useJUnitPlatform() // Используем JUnit 5 для запуска тестов
-        systemProperties = System.properties // Передаем системные свойства в тесты
-        // в тестах, вызывая `gradlew test -Dselenide.headless=true` будем передавать этот параметр в JVM (где его подтянет Selenide)
-        // свойство selenide.headless используется в проектах на основе Selenide для передачи значения параметра в JVM
-        systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-        // свойство chromeoptions.prefs используется для задания настроек браузера в проектах на основе Selenide, выключаем менеджер паролей
-        systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
-    }
+    // Настройки для Chrome (отключаем менеджер паролей)
+    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', 'profile.password_manager_leak_detection=false')
+}
