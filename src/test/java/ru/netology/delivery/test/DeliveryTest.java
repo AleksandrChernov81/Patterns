@@ -19,22 +19,21 @@ import static com.codeborne.selenide.Selenide.open;
 class DeliveryTest {
 
 
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
     @AfterAll
     static void tearDownAll() {
         SelenideLogger.removeListener("allure");
     }
 
-    @BeforeAll
-    static void setUpAll() {
-        Configuration.browser = "chrome"; // Использовать Chrome
-        Configuration.headless = false; // Отключить headless-режим
-        Configuration.holdBrowserOpen = true; // Браузер останется открытым после теста
-        SelenideLogger.addListener("allure", new AllureSelenide());
-    }
 
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
+        Configuration.holdBrowserOpen = true;
     }
 
     @Test

@@ -30,6 +30,7 @@ dependencies {
     testImplementation 'io.qameta.allure:allure-selenide:2.27.0' // Allure интеграция с Selenide
     compileOnly 'org.projectlombok:lombok:1.18.32' // Lombok для генерации boilerplate кода
     annotationProcessor 'org.projectlombok:lombok:1.18.32' // Аннотационный процессор Lombok
+    testImplementation 'com.codeborne:selenide:6.19.1'
 }
 
 test {
