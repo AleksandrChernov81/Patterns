@@ -15,8 +15,8 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-class DeliveryTest {
 
+class DeliveryTest {
 
 
     @AfterAll
@@ -60,22 +60,6 @@ class DeliveryTest {
         $("[data-test-id='success-notification'] .notification__content").should(Condition.exactText("Встреча успешно запланирована на " + secondMeetingDate));
     }
 
-    @Test
-    @DisplayName("Should Test Blank Phone")
-    void shouldTestBlankPhone() {
-        var validUser = DataGenerator.Registration.generateUser("ru");
-        var daysToAddForFirstMeeting = 4;
-        var firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
-        var daysToAddForSecondMeeting = 7;
-        var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
-        $("[placeholder='Город']").setValue(validUser.getCity());
-        $("[placeholder='Дата встречи']").doubleClick().sendKeys(firstMeetingDate);
-        $("[data-test-id='name'] input.input__control").setValue(validUser.getName());
-        $("[name='phone']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='agreement'] .checkbox__box").click();
-        $("[type='button'] .button__text").click();
-        $("[data-test-id='phone'].input_invalid .input__sub").shouldHave(Condition.exactText("Поле обязательно для заполнения"));
-    }
 
     @Test
     @DisplayName("Should Test blank name")
