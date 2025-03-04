@@ -25,7 +25,7 @@ allure {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2' // JUnit 5 API
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2' // JUnit 5 Engine
-    testImplementation 'com.codeborne:selenide:7.2.3' // Selenide для автоматизации тестов
+    testImplementation 'com.codeborne:selenide:6.19.1'// Selenide для автоматизации тестов
     testImplementation 'com.github.javafaker:javafaker:1.0.2' // JavaFaker для генерации тестовых данных
     testImplementation 'io.qameta.allure:allure-selenide:2.27.0' // Allure интеграция с Selenide
     compileOnly 'org.projectlombok:lombok:1.18.32' // Lombok для генерации boilerplate кода
